@@ -1,11 +1,11 @@
 
-cd /UKBIOBANK/pangk/Genebass_results
+cd /your/file/path/Genebass
 
 #################### 1. Run Hail on Python ##################################
 PYSPARK_SUBMIT_ARGS="--driver-memory 12g --executor-memory 12g pyspark-shell" /usr/bin/python-3.11.6/bin/python3.11
 import hail as hl
 hl.init()
-var_mt = hl.read_matrix_table('/UKBIOBANK/pangk/variant_results.mt') # (8074878, 4529)
+var_mt = hl.read_matrix_table('variant_results.mt') # (8074878, 4529)
 
 ################### option A: Export PVal for continous phenotype ######################
 # currently using as of Feb 9, 2024
@@ -29,7 +29,7 @@ AA_entries = AA_entries.drop(*['phenocode', 'description'])
 
 # continous trait
 continous_pval = AA_entries.head(8074878) 
-continous_pval.export(f'/UKBIOBANK/pangk/Genebass_results/1_pval_raw/500k_{trait}_pval.txt.gz', delimiter='\t') 
+continous_pval.export(f'/your/file/path/1_pval_raw/500k_{trait}_pval.txt.gz', delimiter='\t') 
 
 ############################################################
 # Extract the UKB allele frequency 
@@ -38,7 +38,7 @@ continous_pval.export(f'/UKBIOBANK/pangk/Genebass_results/1_pval_raw/500k_{trait
 # PYSPARK_SUBMIT_ARGS="--driver-memory 12g --executor-memory 12g pyspark-shell" /usr/bin/python-3.11.6/bin/python3.11
 # import hail as hl
 # hl.init()
-# var_mt = hl.read_matrix_table('/UKBIOBANK/pangk/variant_results.mt') # (8074878, 4529)
+# var_mt = hl.read_matrix_table('variant_results.mt') # (8074878, 4529)
 
 # var_mt = var_mt.select_entries(var_mt.AF)
 
@@ -57,7 +57,7 @@ continous_pval.export(f'/UKBIOBANK/pangk/Genebass_results/1_pval_raw/500k_{trait
 # AA_entries.show(2)
 
 # continous_pval = AA_entries.head(8074878) 
-# continous_pval.export(f'/UKBIOBANK/pangk/Genebass_results/500k_AF_all.txt.gz', delimiter='\t') 
+# continous_pval.export(f'500k_AF_all.txt.gz', delimiter='\t') 
 
 #################### Ooption B (old): Export BETA and SE of continous phenotype #######################
 # old option 
@@ -77,4 +77,4 @@ continous_pval.export(f'/UKBIOBANK/pangk/Genebass_results/1_pval_raw/500k_{trait
 # AA_entries = AA_entries.drop(*['phenocode', 'locus', 'alleles'])
 
 # continous_beta = AA_entries.head(8074878) # 4000000
-# continous_beta.export(f'/UKBIOBANK/pangk/Genebass_results/beta_output_20240122/500k_{trait}_beta.txt.gz', delimiter='\t') 
+# continous_beta.export(f'500k_{trait}_beta.txt.gz', delimiter='\t') 
