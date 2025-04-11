@@ -11,4 +11,4 @@
 
 # Only argument to modify before running this script -- CANNOT RUN AUTOMATICALLY. CHECK PART 1's script: 
 trait="T2D" 
-bash /UKBIOBANK/pangk/Genebass_results/SCRIPT_2_filter_align_pval.sh $trait
+bash /UKBIOBANK/pangk/Genebass_results/filter_align_pval.sh $trait
